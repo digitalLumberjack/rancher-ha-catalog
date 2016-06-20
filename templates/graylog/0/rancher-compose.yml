@@ -1,0 +1,53 @@
+.catalog:
+  name: "Graylog"
+  version: "v2.0.2-2"
+  description: "Open source log management that actually works. Search, analysis and alerting across all of your log files"
+  minimum_rancher_version: v0.44.0
+  questions:
+    - variable: "GRAYLOG_PASSWORD_SECRET"
+      label: "Graylog password secret"
+      description: "The salt for graylog passwords"
+      type: "string"
+      required: true
+    - variable: "GRAYLOG_ROOT_PASSWORD_SHA2"
+      label: "Graylog 'admin' password (sha256)"
+      description: "The admin password, can be created with : 'echo -n yourpassword | shasum -a 256'"
+      type: "string"
+      required: true
+    - variable: "elasticsearch_link"
+      description: |
+        stack/service link or external service link to elasticsearch
+        cluster.
+      label: "Elasticsearch stack/service"
+      default: "es/elasticsearch-clients"
+      required: true
+      type: "service"
+    - variable: "mongo_link"
+      description: |
+        stack/service link or external service link to mongo cluster.
+      label: "MongoDB stack/service"
+      default: "mongodb/mongo-cluster"
+      required: true
+      type: "service"
+
+graylog-server:
+  scale: 2
+  health_check:
+    port: 12900
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: GET /system/lbstatus HTTP/1.0
+    healthy_threshold: 2
+    response_timeout: 2000
+
+graylog:
+  scale: 1
+  load_balancer_config:
+    haproxy_config: {}
+  health_check:
+    port: 42
+    interval: 2000
+    unhealthy_threshold: 3
+    strategy: recreate
+    response_timeout: 2000
+    healthy_threshold: 2
