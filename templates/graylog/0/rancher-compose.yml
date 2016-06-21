@@ -14,6 +14,18 @@
       description: "The admin password, can be created with : 'echo -n yourpassword | shasum -a 256'"
       type: "string"
       required: true
+    - variable: "GRAYLOG_ELASTICSEARCH_CLUSTER_NAME"
+      label: "Es cluster name"
+      description: "default : es"
+      type: "string"
+      required: true
+      default: es
+    - variable: "GRAYLOG_REST_TRANSPORT_URI"
+      label: "Graylog rest transport uri"
+      description: "http://ip_of_server:12900/"
+      type: "string"
+      required: true
+      default: http://graylog.test.dev.swm.cloud:12900
     - variable: "elasticsearch_link"
       description: |
         stack/service link or external service link to elasticsearch
