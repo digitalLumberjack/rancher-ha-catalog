@@ -25,7 +25,7 @@
       description: "http://ip_of_server:12900/"
       type: "string"
       required: true
-      default: http://graylog.test.dev.swm.cloud:12900
+      default: http://your_graylog_fqdn:12900
     - variable: "elasticsearch_link"
       description: |
         stack/service link or external service link to elasticsearch

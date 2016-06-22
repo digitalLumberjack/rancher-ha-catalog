@@ -5,17 +5,21 @@ graylog-server:
     GRAYLOG_ROOT_PASSWORD_SHA2: ${GRAYLOG_ROOT_PASSWORD_SHA2}
     GRAYLOG_REST_TRANSPORT_URI: ${GRAYLOG_REST_TRANSPORT_URI}
     GRAYLOG_ELASTICSEARCH_CLUSTER_NAME: ${GRAYLOG_ELASTICSEARCH_CLUSTER_NAME}
+    GRAYLOG_MONGODB_URI: mongodb://mongo:27017,mongo:27017/graylog
   external_links:
     - ${mongo_link}:mongo
     - ${elasticsearch_link}:elasticsearch
+  ports:
+    - 12201:12201/tcp
+    - 12201:12201/udp
 graylog:
   ports:
-  - 80:9000
-  - 12900:12900
+    - 80:9000
+    - 12900:12900
   labels:
     io.rancher.container.pull_image: always
   tty: true
   image: rancher/load-balancer-service
   links:
-  - graylog-server:graylog-server
+    - graylog-server:graylog-server
   stdin_open: true
