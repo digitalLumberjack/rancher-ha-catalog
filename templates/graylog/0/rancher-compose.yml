@@ -5,8 +5,8 @@
   minimum_rancher_version: v0.44.0
   questions:
     - variable: "GRAYLOG_PASSWORD_SECRET"
-      label: "Graylog password secret"
-      description: "The salt for graylog passwords"
+      label: "Graylog password pepper"
+      description: "The pepper for graylog passwords (minimum 16 char)"
       type: "string"
       required: true
     - variable: "GRAYLOG_ROOT_PASSWORD_SHA2"
