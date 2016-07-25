@@ -1,0 +1,23 @@
+nexus-server:
+  labels:
+    io.rancher.container.pull_image: always
+  tty: true
+  image: digitallumberjack/docker-nexus3:v3.0.1-01
+  volumes:
+  - ${VOLUME_NAME}:/nexus-data
+  stdin_open: true
+  volume_driver: ${VOLUME_DRIVER}
+
+nexus-lb:
+  ports:
+  - ${NEXUS_PORT}:8081
+  - ${NEXUS_HTTPS_PORT}:8081
+  labels:
+    io.rancher.loadbalancer.target.nexus-server: ${NEXUS_URL}:${NEXUS_PORT}=8081,${NEXUS_URL}:${NEXUS_HTTPS_PORT}=8081
+    io.rancher.loadbalancer.ssl.ports: ${NEXUS_HTTPS_PORT}
+  tty: true
+  image: rancher/load-balancer-service
+  links:
+  - nexus-server:nexus-server
+  stdin_open: true
+
