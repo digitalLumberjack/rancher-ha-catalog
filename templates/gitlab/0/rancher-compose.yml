@@ -1,0 +1,218 @@
+.catalog:
+  name: "Gitlab"
+  version: "v8.10.0"
+  description: "Awesome open source scm and project management tool. The first admin user is 'root' and you will define the password at first connection."
+  minimum_rancher_version: v0.44.0
+  questions:
+    - variable: "GITLAB_FQDN"
+      label: "Gitlab public fqdn"
+      description: "The public fqdn for gitlab frontend (e.g. : gitlab.mycompany.com)"
+      type: "string"
+      required: true
+    - variable: "CERT_NAME"
+      label: "Certificate Name"
+      description: "The name of the rancher certificate to use for the load balancer. Must be valid for your fqdn."
+      type: "certificate"
+      required: false
+    - variable: "GITLAB_UI_PORT"
+      label: "Gitlab public port"
+      description: "The public port for gitlab frontend"
+      type: "string"
+      required: true
+      default: 80
+    - variable: "GITLAB_UI_HTTPS_PORT"
+      label: "Gitlab public https port"
+      description: "The public port for https gitlab frontend"
+      type: "string"
+      required: true
+      default: 443
+    - variable: "GITLAB_SSH_PORT"
+      label: "Gitlab ssh port"
+      description: "The public port for ssh connections"
+      type: "string"
+      required: true
+      default: 10022
+    - variable: "DB_ADAPTER"
+      label: "Database adapter"
+      description: "The driver for the database connection"
+      type: "enum"
+      options:
+        - mysql2
+        - postgresql
+      required: true
+      default: mysql2
+    - variable: "DB_HOST"
+      label: "Database host"
+      description: "The database hostname or ip"
+      type: "string"
+      required: true
+      default: mysql
+    - variable: "DB_PORT"
+      label: "Database port"
+      description: "The database port"
+      type: "string"
+      required: true
+      default: 3306
+    - variable: "DB_NAME"
+      label: "Database name"
+      description: "The database name"
+      type: "string"
+      required: true
+      default: gitlab
+    - variable: "DB_USER"
+      label: "Database user"
+      description: "The database user"
+      type: "string"
+      required: true
+      default: gitlab
+    - variable: "DB_PASS"
+      label: "Database password"
+      description: "The database password"
+      type: "string"
+      required: true
+    - variable: "GITLAB_SECRETS_DB_KEY_BASE"
+      label: "Gitlab secret"
+      description: "Gitlab secret"
+      type: "string"
+      required: true
+    - variable: "GITLAB_EMAIL"
+      label: "Gitlab main email"
+      description: "Gitlab information email sender"
+      type: "string"
+      required: true
+    - variable: "GITLAB_EMAIL_REPLY_TO"
+      label: "Gitlab reply-to email"
+      description: "Gitlab reply to email (e.g. : no-reply@mycompany.com)"
+      type: "string"
+      required: true
+    - variable: "IMAP_HOST"
+      label: "IMAP host"
+      description: "IMAP server ip or host, the user and password are the same as SMTP"
+      type: "string"
+      required: true    
+    - variable: "IMAP_PORT"
+      label: "IMAP port"
+      description: "IMAP server port"
+      type: "string"
+      required: true
+    - variable: "IMAP_SSL"
+      label: "IMAP SSL"
+      description: "IMAP ssl connection"
+      type: "boolean"
+      required: true
+      default: true
+    - variable: "IMAP_STARTTLS"
+      label: "IMAP STARTTLS"
+      description: "IMAP starttls protocol"
+      type: "boolean"
+      required: true
+      default: false
+    - variable: "SMTP_HOST"
+      label: "SMTP host"
+      description: "SMTP server ip or host"
+      type: "string"
+      required: true
+    - variable: "SMTP_PORT"
+      label: "SMTP domain"
+      description: "SMTP server domain"
+      type: "string"
+      required: true
+      default: 587
+    - variable: "SMTP_USER"
+      label: "SMTP user"
+      description: "SMTP server user"
+      type: "string"
+      required: true
+    - variable: "SMTP_PASS"
+      label: "SMTP password"
+      description: "SMTP server password"
+      type: "string"
+      required: true
+    - variable: "SMTP_DOMAIN"
+      label: "SMTP domain"
+      description: "SMTP server domain"
+      type: "string"
+      required: true
+    - variable: "SMTP_STARTTLS"
+      label: "SMTP STARTTLS"
+      description: "SMTP starttls protocol"
+      type: "boolean"
+      required: true
+      default: true
+    - variable: "DEBUG"
+      label: "Debug mode"
+      description: "Huge amount of logs"
+      type: "boolean"
+      required: true
+      default: false
+    - variable: "GITLAB_TIMEZONE"
+      label: "Gitlab timezone"
+      description: "Gitlab timezone (e.g. : Europe/Paris )"
+      type: "string"
+      required: true
+      default: Europe/Paris
+    - variable: "LDAP_ENABLED"
+      label: "Enable LDAP"
+      description: "Enable LDAP login"
+      type: "boolean"
+      required: true
+      default: true
+    - variable: "LDAP_HOST"
+      label: "LDAP host"
+      description: "LDAP host or ip"
+      type: "string"
+      required: false
+    - variable: "LDAP_PORT"
+      label: "LDAP port"
+      description: "LDAP port"
+      type: "string"
+      required: false
+    - variable: "LDAP_BASE"
+      label: "LDAP search base"
+      description: "LDAP search base (e.g. : OU=COMPANY,DC=company,DC=com)"
+      type: "string"
+      required: false
+    - variable: "LDAP_BIND_DN"
+      label: "LDAP Bind DN"
+      description: "LDAP bind dn (login)"
+      type: "string"
+      required: false
+    - variable: "LDAP_PASS"
+      label: "LDAP password"
+      description: "LDAP password"
+      type: "string"
+      required: false
+    - variable: "VOLUME_NAME"
+      label: "Persistent data volume name"
+      description: "The volume should be a convoy volume name (e.g. : gitlab-nfs-volume), or an absolute path on host (e.g. : /srv/gitlab-data/)"
+      type: "string"
+      required: true
+    - variable: "VOLUME_DRIVER"
+      label: "Persistent data volume driver"
+      description: "The volume driver, (e.g. : convoy-nfs)"
+      type: "string"
+      required: false
+      default: convoy-nfs
+
+gitlab-lb:
+  scale: 1
+  load_balancer_config:
+    haproxy_config: {}
+  default_cert: ${CERT_NAME}
+  health_check:
+    port: 42
+    interval: 2000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    response_timeout: 2000
+
+gitlab-server:
+  scale: 1
+  health_check:
+    port: 80
+    interval: 2000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    response_timeout: 2000
+    initializing_timeout: 60000
+
