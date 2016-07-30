@@ -14,34 +14,29 @@
       description: "The admin password, can be created with : 'echo -n yourpassword | shasum -a 256'"
       type: "string"
       required: true
+    - variable: "ELASTIC_URI"
+      label: "Elastic search URI"
+      description: "Elastic search uri (e.g. : elastic.domain.com:9300"
+      type: "string"
+      required: true
     - variable: "GRAYLOG_ELASTICSEARCH_CLUSTER_NAME"
       label: "Es cluster name"
       description: "default : es"
       type: "string"
       required: true
       default: es
+    - variable: "MONGO_URI"
+      label: "MongoDB URI"
+      description: "The mongo connection URI (e.g. : mongodb://server1:21017,server2:21017/base"
+      default: "mongodb://mongo:2017/graylog"
+      required: true
+      type: "string"
     - variable: "GRAYLOG_REST_TRANSPORT_URI"
       label: "Graylog rest transport uri"
       description: "http://ip_of_server:12900/"
       type: "string"
       required: true
       default: http://your_graylog_fqdn:12900
-    - variable: "elasticsearch_link"
-      description: |
-        stack/service link or external service link to elasticsearch
-        cluster.
-      label: "Elasticsearch stack/service"
-      default: "es/elasticsearch-clients"
-      required: true
-      type: "service"
-    - variable: "mongo_link"
-      description: |
-        stack/service link or external service link to mongo cluster.
-      label: "MongoDB stack/service"
-      default: "mongodb/mongo-cluster"
-      required: true
-      type: "service"
-
 graylog-server:
   scale: 2
   health_check:
