@@ -1,0 +1,30 @@
+traefik:
+  ports:
+  - ${admin_port}:8000/tcp
+  - ${http_port}:8080/tcp
+  - ${https_port}:8443/tcp
+  log_driver: ''
+  labels:
+    io.rancher.sidekicks: traefik-conf
+    io.rancher.container.hostname_override: container_name
+    traefik.loadbalancer: 'true'
+  tty: true
+  log_opt: {}
+  image: rawmind/alpine-traefik:1.0.1-1
+  environment:
+  - CONF_INTERVAL=${refresh_interval}
+  - TRAEFIK_HTTPS_ENABLE=${https_enable}
+  - TRAEFIK_DOMAIN=${domain}
+  - TRAEFIK_SEPARATOR=${separator}
+  volumes_from:
+  - traefik-conf
+traefik-conf:
+  log_driver: ''
+  labels:
+    io.rancher.container.start_once: 'true'
+    io.rancher.container.pull_image: always
+  tty: true
+  log_opt: {}
+  image: digitallumberjack/rancher-traefik:v0.3.4-globalconfig
+  net: none
+
