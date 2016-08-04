@@ -1,4 +1,4 @@
-graylog-server:
+graylog:
   image: graylog2/server:2.0.2-2
   environment:
     GRAYLOG_PASSWORD_SECRET: ${GRAYLOG_PASSWORD_SECRET}
@@ -10,14 +10,5 @@ graylog-server:
   ports:
     - 12201:12201/tcp
     - 12201:12201/udp
-graylog:
-  ports:
     - 80:9000
     - 12900:12900
-  labels:
-    io.rancher.container.pull_image: always
-  tty: true
-  image: rancher/load-balancer-service
-  links:
-    - graylog-server:graylog-server
-  stdin_open: true
