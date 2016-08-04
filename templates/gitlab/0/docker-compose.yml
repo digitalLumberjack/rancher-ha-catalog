@@ -65,7 +65,7 @@ redis:
   image: redis:3.2.1
   stdin_open: true
 
-gitlab-lb:
+gitlab:
   ports:
     - ${GITLAB_UI_PORT}:80
     - ${GITLAB_UI_HTTPS_PORT}:80

@@ -194,7 +194,7 @@
       required: false
       default: convoy-nfs
 
-gitlab-lb:
+gitlab:
   scale: 1
   load_balancer_config:
     haproxy_config: {}
