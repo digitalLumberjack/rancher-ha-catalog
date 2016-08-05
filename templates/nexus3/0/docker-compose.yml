@@ -8,7 +8,7 @@ nexus-server:
   stdin_open: true
   volume_driver: ${VOLUME_DRIVER}
 
-nexus-lb:
+nexus:
   ports:
   - ${NEXUS_PORT}:8081
   - ${NEXUS_HTTPS_PORT}:8081

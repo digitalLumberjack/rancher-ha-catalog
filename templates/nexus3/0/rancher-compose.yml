@@ -38,7 +38,7 @@
       required: false
       default: convoy-nfs
 
-nexus-lb:
+nexus:
   scale: 1
   load_balancer_config:
     haproxy_config: {}
