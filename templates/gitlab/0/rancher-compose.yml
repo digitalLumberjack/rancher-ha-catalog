@@ -120,12 +120,12 @@
       default: 587
     - variable: "SMTP_USER"
       label: "SMTP user"
-      description: "SMTP server user"
+      description: "SMTP server user, let empty if authentication type is 'none'"
       type: "string"
       required: true
     - variable: "SMTP_PASS"
       label: "SMTP password"
-      description: "SMTP server password"
+      description: "SMTP server password, let empty if authentication type is 'none'"
       type: "string"
       required: true
     - variable: "SMTP_DOMAIN"
