@@ -1,0 +1,24 @@
+.catalog:
+  name: dokuwiki
+  version: 2016-06
+  description: |
+  	wiki
+  minimum_rancher_version: v0.59.0
+  maintainer: "MikaXII <mika@recalbox.com"
+  uuid: dokuwiki-0
+  questions:
+    - variable: "port"
+      description: "http public port to listen."
+      label: "Http port:"
+      required: true
+      default: 80
+      type: "int"
+dokuwiki:
+  retain_ip: true
+  health_check:
+    port: 80
+    interval: 5000
+    unhealthy_threshold: 3
+    request_line: 'GET /dashboard/# HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 5000
