@@ -4,7 +4,7 @@
   description: |
   	wiki
   minimum_rancher_version: v0.59.0
-  maintainer: "MikaXII <mika@recalbox.com"
+  maintainer: "MikaXII <mika@recalbox.com>"
   uuid: dokuwiki-0
   questions:
     - variable: "port"

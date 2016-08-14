@@ -3,7 +3,6 @@ dokuwiki:
   - ${port}:80/tcp
   log_driver: ''
   image: recalbox/dokuwiki
-  environment:
   volumes_from:
   - dokuwiki-data
 dokuwiki-data:
