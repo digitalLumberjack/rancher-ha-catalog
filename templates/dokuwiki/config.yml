@@ -1,0 +1,8 @@
+name : Dokuwiki
+description: |
+	Dokuwiki 
+version: 2016-06-26a
+category: wiki
+maintainer: "MikaXII <mika@recalbox.com>"
+minimum_rancher_version: v0.59.0
+license: CC Attribution-Share Alike 4.0 International
