@@ -1,7 +1,6 @@
 dokuwiki:
   ports:
   - ${port}:80/tcp
-  log_driver: ''
   image: recalbox/dokuwiki
   volumes_from:
   - dokuwiki-data
