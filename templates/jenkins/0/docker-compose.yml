@@ -16,6 +16,6 @@ rancher-cli-sidekick:
   tty: true
   labels:
     io.rancher.container.start_once: true
-  image: digitalLumberjack/docker-rancher-cli-sidekick:v0.1.0-rc3
+  image: digitallumberjack/docker-rancher-cli-sidekick:v0.1.0-rc3
   stdin_open: true
   entrypoint: /bin/true
