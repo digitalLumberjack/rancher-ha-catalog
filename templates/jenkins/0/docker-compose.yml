@@ -1,0 +1,10 @@
+jenkins:
+  image: jenkins:2.7.3
+  labels:
+    io.rancher.container.pull_image: always
+    traefik.port: '8080'
+  tty: true
+  stdin_open: true
+  volume_driver: ${VOLUME_DRIVER}
+  volumes:
+  - ${VOLUME_NAME}:/var/jenkins_home

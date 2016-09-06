@@ -1,0 +1,5 @@
+name: Jenkins
+description: |
+  Open source CI
+version: v2.7.3
+category: Continuous Integration
