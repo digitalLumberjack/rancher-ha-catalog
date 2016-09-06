@@ -8,7 +8,9 @@ jenkins:
   stdin_open: true
   volume_driver: ${VOLUME_DRIVER}
   volumes:
-  - ${VOLUME_NAME}:/var/jenkins_home
+    - ${VOLUME_NAME}:/var/jenkins_home
+  volumes_from:
+    - rancher-cli-sidekick
 
 rancher-cli-sidekick:
   restart: always
