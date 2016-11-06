@@ -1,0 +1,29 @@
+.catalog:
+  name: "Jenkins"
+  version: "v2.19.1"
+  description: "Open source continuous integration server. The admin password is in the logs at first run."
+  minimum_rancher_version: v0.44.0
+  questions:
+    - variable: "VOLUME_NAME"
+      label: "Persistent data volume name"
+      description: "The volume should be a convoy volume name (e.g. : jenkins-nfs-volume), or an absolute path on host (e.g. : /var/jenkins_home)"
+      type: "string"
+      required: true
+    - variable: "VOLUME_DRIVER"
+      label: "Persistent data volume driver"
+      description: "The volume driver, (e.g. : convoy-nfs)"
+      type: "string"
+      required: false
+      default: convoy-nfs
+
+jenkins:
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    initializing_timeout: 240000
+    unhealthy_threshold: 3
+    strategy: recreate
+    response_timeout: 2000
+    request_line: GET "/login" "HTTP/1.0"
+    healthy_threshold: 2
