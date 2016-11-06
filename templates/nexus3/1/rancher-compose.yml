@@ -1,0 +1,60 @@
+.catalog:
+  name: "Nexus3"
+  version: "v3.1.0"
+  description: "Open source repository management tool.<br/>The default username / password is admin:admin."
+  minimum_rancher_version: v0.44.0
+  questions:
+    - variable: "NEXUS_URL"
+      label: "Nexus public fqdn"
+      description: "The public fqdn for nexus frontend (e.g. : nexus.mycompany.com)"
+      type: "string"
+      required: true
+    - variable: "CERT_NAME"
+      label: "Certificate Name"
+      description: "The name of the rancher certificate to use for the load balancer. Must be valid for your fqdn."
+      type: "certificate"
+      required: false
+    - variable: "NEXUS_PORT"
+      label: "Nexus public port"
+      description: "The public port for nexus frontend"
+      type: "string"
+      required: true
+      default: 80
+    - variable: "NEXUS_HTTPS_PORT"
+      label: "Nexus public https port"
+      description: "The public port for secure https nexus frontend"
+      type: "string"
+      required: false
+      default: 443
+    - variable: "VOLUME_NAME"
+      label: "Persistent data volume name"
+      description: "The volume should be a convoy volume name (e.g. : nexus-nfs-volume), or an absolute path on host (e.g. : /srv/nexus-data/)"
+      type: "string"
+      required: true
+    - variable: "VOLUME_DRIVER"
+      label: "Persistent data volume driver"
+      description: "The volume driver, (e.g. : convoy-nfs)"
+      type: "string"
+      required: false
+      default: convoy-nfs
+
+nexus:
+  scale: 1
+  load_balancer_config:
+    haproxy_config: {}
+  default_cert: ${CERT_NAME}
+  health_check:
+    port: 42
+    interval: 2000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    response_timeout: 2000
+
+nexus-server:
+  scale: 1
+  health_check:
+    port: 8081
+    interval: 2000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    response_timeout: 2000
