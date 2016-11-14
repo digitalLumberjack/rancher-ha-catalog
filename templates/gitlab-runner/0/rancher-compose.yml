@@ -1,0 +1,40 @@
+.catalog:
+  name: "Gitlab Runner"
+  version: "v1.7.0-2"
+  description: "Gitlab CI runner."
+  minimum_rancher_version: v0.44.0
+  questions:
+    - variable: "GITLAB_SERVER_URL"
+      label: "Gitlab server url"
+      description: "The public url for gitlab ci (e.g. : gitlab.mycompany.com/ci)"
+      type: "string"
+      required: true
+    - variable: "RUNNER_DESCRIPTION"
+      label: "Runner Description"
+      description: "The name of the runner"
+      type: "string"
+      required: true
+      default: "rancher-runner"
+    - variable: "RUNNER_TOKEN"
+      label: "Runner token"
+      description: "The gitlab token to register the runner"
+      type: "string"
+      required: true
+    - variable: "RUNNER_EXECUTOR"
+      label: "Runner executor (docker, shell)"
+      description: "The runner executor (docker, shell)"
+      type: "string"
+      required: true
+      default: "docker"
+    - variable: "RUNNER_DOCKER_IMAGE"
+      label: "Runner Docker Image"
+      description: "Image to start when using 'docker' executor."
+      type: "string"
+      required: true
+      default: "docker:latest"
+    - variable: "RUNNER_DOCKER_MODE"
+      label: "Docker mode"
+      description: "Docker mode to use : 'socket' to share the host docker socket and use the host deamon, 'dind' to use docker in docker"
+      type: "string"
+      required: true
+      default: "socket"

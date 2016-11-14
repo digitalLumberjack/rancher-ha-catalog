@@ -1,0 +1,14 @@
+runner:
+  environment:
+    CI_SERVER_URL: ${GITLAB_SERVER_URL}
+    RUNNER_DESCRIPTION: ${RUNNER_DESCRIPTION}
+    RUNNER_DOCKER_IMAGE: ${RUNNER_DOCKER_IMAGE}
+    RUNNER_DOCKER_MODE: ${RUNNER_DOCKER_MODE}
+    RUNNER_EXECUTOR: ${RUNNER_EXECUTOR}
+    RUNNER_TOKEN: ${RUNNER_TOKEN}
+  labels:
+    io.rancher.container.pull_image: always
+  tty: true
+  image: digitallumberjack/docker-gitlab-ci-multi-runner:v1.7.0-2
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
