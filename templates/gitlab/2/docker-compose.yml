@@ -1,0 +1,83 @@
+gitlab-server:
+  environment:
+    DEBUG: ${DEBUG}
+    DB_ADAPTER: ${DB_ADAPTER}
+    DB_HOST: ${DB_HOST}
+    DB_PORT: ${DB_PORT}
+    DB_NAME: ${DB_NAME}
+    DB_USER: ${DB_USER}
+    DB_PASS: ${DB_PASS}
+    GITLAB_BACKUP_SCHEDULE: daily
+    GITLAB_BACKUP_TIME: 01:00
+    GITLAB_EMAIL: ${GITLAB_EMAIL}
+    GITLAB_EMAIL_REPLY_TO: ${GITLAB_EMAIL_REPLY_TO}
+    GITLAB_HOST: ${GITLAB_FQDN}
+    GITLAB_HTTPS: 'true'
+    GITLAB_NOTIFY_ON_BROKEN_BUILDS: 'true'
+    GITLAB_NOTIFY_PUSHER: 'true'
+    GITLAB_PORT: '80'
+    GITLAB_SECRETS_DB_KEY_BASE: ${GITLAB_SECRETS_DB_KEY_BASE}
+    GITLAB_SSH_PORT: '22'
+    GITLAB_TIMEZONE: ${GITLAB_TIMEZONE}
+    TZ: ${GITLAB_TIMEZONE}
+
+    IMAP_ENABLED: 'true'
+    IMAP_HOST: ${IMAP_HOST}
+    IMAP_PORT: ${IMAP_PORT}
+    IMAP_USER: ${SMTP_USER}
+    IMAP_PASS: ${SMTP_PASS}
+    IMAP_SSL: ${IMAP_SSL}
+    IMAP_STARTTLS: ${IMAP_STARTTLS}
+
+    SMTP_AUTHENTICATION: login
+    SMTP_DOMAIN: ${SMTP_DOMAIN}
+    SMTP_ENABLED: 'true'
+    SMTP_HOST: ${SMTP_HOST}
+    SMTP_PORT: ${SMTP_PORT}
+    SMTP_USER: ${SMTP_USER}
+    SMTP_PASS: ${SMTP_PASS}
+    SMTP_STARTTLS: ${SMTP_STARTTLS}
+
+    OAUTH_AUTO_LINK_LDAP_USER: 'false'
+    LDAP_ENABLED: ${LDAP_ENABLED}
+    LDAP_HOST: ${LDAP_HOST}
+    LDAP_PORT: ${LDAP_PORT}
+    LDAP_BASE: ${LDAP_BASE}
+    LDAP_BIND_DN: ${LDAP_BIND_DN}
+    LDAP_PASS: ${LDAP_PASS}
+
+    REDIS_HOST: redis
+    REDIS_PORT: '6379'
+    SSL_SELF_SIGNED: 'false'
+    GITLAB_SECRETS_SECRET_KEY_BASE: ${GITLAB_SECRETS_SECRET_KEY_BASE}
+    GITLAB_SECRETS_OTP_KEY_BASE: ${GITLAB_SECRETS_OTP_KEY_BASE}
+  links:
+    - redis:redis
+  tty: true
+  image: digitallumberjack/docker-gitlab:v8.13.5
+  volumes:
+    - ${VOLUME_NAME}:/home/git/data
+  stdin_open: true
+  volume_driver: ${VOLUME_DRIVER}
+
+redis:
+  labels:
+    io.rancher.container.pull_image: always
+  tty: true
+  image: redis:3.2.1
+  stdin_open: true
+
+gitlab:
+  ports:
+    - ${GITLAB_UI_PORT}:80
+    - ${GITLAB_UI_HTTPS_PORT}:80
+    - ${GITLAB_SSH_PORT}:22/tcp
+  labels:
+    io.rancher.loadbalancer.target.gitlab-server: ${GITLAB_FQDN}:${GITLAB_UI_PORT}=80,${GITLAB_FQDN}:${GITLAB_UI_HTTPS_PORT}=80,${GITLAB_FQDN}:${GITLAB_SSH_PORT}=22
+    io.rancher.loadbalancer.ssl.ports: ${GITLAB_UI_HTTPS_PORT}
+  tty: true
+  image: rancher/load-balancer-service
+  links:
+    - gitlab-server:gitlab-server
+  stdin_open: true
+
