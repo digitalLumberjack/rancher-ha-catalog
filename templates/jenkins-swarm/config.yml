@@ -1,0 +1,5 @@
+name: Jenkins swarm agent
+description: |
+  Jenkins swarm agent with docker support
+version: v2.2.0
+category: Continuous Integration 

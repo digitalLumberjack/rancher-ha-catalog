@@ -1,5 +1,5 @@
 name: Gitlab runner
 description: |
   Gitlab ci runner
-version: v1.7.0-2
+version: v1.8.0
 category: Source Management
