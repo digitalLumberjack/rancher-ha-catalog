@@ -1,0 +1,11 @@
+.catalog:
+  name: "Jenkins Swarm Agent"
+  version: "v2.2.0"
+  description: "Jenkins swarm agent with docker support."
+  minimum_rancher_version: v0.44.0
+  questions:
+    - variable: "JENKINS_COMMAND"
+      label: "Jenkins Swarm Command Line"
+      description: "The commandline to start the swarm agent (see : https://wiki.jenkins-ci.org/display/JENKINS/Swarm+Plugin)\nThe command line might look like : \n -master 'https://myjenkins.com' -executors '2' -name 'builder' -password 'build' -username 'build'"
+      type: "string"
+      required: true
