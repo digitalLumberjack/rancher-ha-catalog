@@ -1,0 +1,48 @@
+.catalog:
+  name: "Graylog"
+  version: "v2.1.2-1"
+  description: "Open source log management that actually works. Search, analysis and alerting across all of your log files"
+  minimum_rancher_version: v0.44.0
+  questions:
+    - variable: "GRAYLOG_PASSWORD_SECRET"
+      label: "Graylog password pepper"
+      description: "The pepper for graylog passwords (minimum 16 char)"
+      type: "string"
+      required: true
+    - variable: "GRAYLOG_ROOT_PASSWORD_SHA2"
+      label: "Graylog 'admin' password (sha256)"
+      description: "The admin password, can be created with : 'echo -n yourpassword | shasum -a 256'"
+      type: "string"
+      required: true
+    - variable: "ELASTIC_URI"
+      label: "Elastic search URI"
+      description: "Elastic search uri (e.g. : elastic.domain.com:9300"
+      type: "string"
+      required: true
+    - variable: "GRAYLOG_ELASTICSEARCH_CLUSTER_NAME"
+      label: "Es cluster name"
+      description: "default : es"
+      type: "string"
+      required: true
+      default: es
+    - variable: "MONGO_URI"
+      label: "MongoDB URI"
+      description: "The mongo connection URI (e.g. : mongodb://server1:21017,server2:21017/base"
+      default: "mongodb://mongo:2017/graylog"
+      required: true
+      type: "string"
+    - variable: "GRAYLOG_WEB_ENDPOINT_URI"
+      label: "Graylog rest transport uri"
+      description: "http://ip_of_server:12900/"
+      type: "string"
+      required: true
+      default: http://your_graylog_fqdn:12900
+graylog:
+  scale: 1
+  health_check:
+    port: 9000
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: GET /system/lbstatus HTTP/1.0
+    healthy_threshold: 2
+    response_timeout: 2000
