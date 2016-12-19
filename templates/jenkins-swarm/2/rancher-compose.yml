@@ -1,0 +1,29 @@
+.catalog:
+  name: "Jenkins Swarm Agent"
+  version: "v2.2.0-dind"
+  description: "Jenkins swarm agent with docker support."
+  minimum_rancher_version: v0.44.0
+  questions:
+    - variable: "JENKINS_COMMAND"
+      label: "Jenkins Swarm Command Line"
+      description: "The commandline to start the swarm agent (see : https://wiki.jenkins-ci.org/display/JENKINS/Swarm+Plugin)\nThe command line might look like : \n -master 'https://myjenkins.com' -executors '2' -name 'builder' -password 'build' -username 'build'"
+      type: "string"
+      required: true
+    - variable: "RUNNER_DOCKER_PRIVATE_REGISTRY_URL"
+      label: "Private registry url"
+      description: "If you want to pull and push image to/from a private registry, fill the private registry host + port (e.g. : my-repo.company.com:5000)"
+      type: "string"
+      required: false
+      default: ""
+    - variable: "RUNNER_DOCKER_PRIVATE_REGISTRY_TOKEN"
+      label: "Private registry token"
+      description: "If you want to pull and push image to/from a private registry, fill the private token. To get a private token, use docker login on a linux, then get the token in ~/.docker/config.json"
+      type: "string"
+      required: false
+      default: ""
+    - variable: "AGENT_GLOBAL"
+      label: "Global Service"
+      description: "Start an agent on each environment host"
+      type: "boolean"
+      default: false
+      required: true
