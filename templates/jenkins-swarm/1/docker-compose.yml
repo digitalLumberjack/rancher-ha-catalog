@@ -1,0 +1,9 @@
+agent:
+  labels:
+    io.rancher.container.pull_image: always
+    io.rancher.scheduler.global: ${AGENT_GLOBAL}
+  tty: true
+  image: digitallumberjack/docker-jenkins-swarm-slave-docker:v2.2.0
+  command: ${JENKINS_COMMAND}
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
