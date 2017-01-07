@@ -13,6 +13,6 @@ runner:
     io.rancher.container.pull_image: always
     io.rancher.scheduler.global: ${RUNNER_GLOBAL}
   tty: true
-  image: digitallumberjack/docker-gitlab-ci-multi-runner:v1.9.0-2
+  image: digitallumberjack/docker-gitlab-ci-multi-runner:v1.9.0-1
   volumes:
     - /var/run/docker.sock:/var/run/docker.sock
