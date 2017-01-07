@@ -1,0 +1,18 @@
+runner:
+  environment:
+    CI_SERVER_URL: ${GITLAB_SERVER_URL}
+    RUNNER_DESCRIPTION: ${RUNNER_DESCRIPTION}
+    RUNNER_DOCKER_IMAGE: ${RUNNER_DOCKER_IMAGE}
+    RUNNER_DOCKER_MODE: ${RUNNER_DOCKER_MODE}
+    RUNNER_EXECUTOR: ${RUNNER_EXECUTOR}
+    RUNNER_TOKEN: ${RUNNER_TOKEN}
+    RUNNER_DOCKER_PRIVATE_REGISTRY_URL: ${RUNNER_DOCKER_PRIVATE_REGISTRY_URL}
+    RUNNER_DOCKER_PRIVATE_REGISTRY_TOKEN: ${RUNNER_DOCKER_PRIVATE_REGISTRY_TOKEN}
+    RUNNER_DOCKER_ADDITIONAL_VOLUME: ${RUNNER_DOCKER_ADDITIONAL_VOLUME}
+  labels:
+    io.rancher.container.pull_image: always
+    io.rancher.scheduler.global: ${RUNNER_GLOBAL}
+  tty: true
+  image: digitallumberjack/docker-gitlab-ci-multi-runner:v1.9.0-2
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
